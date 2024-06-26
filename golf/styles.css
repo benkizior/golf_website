@@ -40,6 +40,7 @@ body {
     color: white;
     font-size: 28px;
     margin: 10px 0 10px;
+    text-align: center;
   }
 
   .location {
@@ -195,9 +196,7 @@ img {
   object-fit: cover;
   overflow: hidden;
 }
-.info {
 
-}
 
 .rules-list {
   list-style-type: circle;
@@ -206,4 +205,10 @@ img {
 .legal-info {
   font-size: 14px;
   margin-left: 15px;
+}
+
+@media (max-width: 650px) {
+  .fs {
+    flex-direction: column;
+  }
 }
