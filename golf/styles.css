@@ -1,3 +1,5 @@
+
+
 body {
   color: white;
     margin: 0;
@@ -30,13 +32,13 @@ body {
   h2 {
     text-align: center;
     color: white;
-    font-size: 34px;
+    font-size: 39px;
     margin: 0;
   }
 
   h3 {
     color: white;
-    font-size: 24px;
+    font-size: 28px;
     margin: 10px 0 10px;
   }
 
@@ -54,9 +56,9 @@ body {
     padding: 0;
   }
 
-  li {
+  .rules-list li {
     margin-bottom: 5px;
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .location-address {
@@ -131,7 +133,7 @@ footer {
 padding: 20px;
 text-align: center;
 font-size: 14px;
-color: #666;
+color: #777777;
 }
 
 .footer-container {
@@ -199,4 +201,9 @@ img {
 
 .rules-list {
   list-style-type: circle;
+}
+
+.legal-info {
+  font-size: 14px;
+  margin-left: 15px;
 }
