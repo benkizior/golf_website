@@ -43,6 +43,7 @@ body {
     text-align: center;
   }
 
+
   .location {
     align-content: center;
     color: white;
@@ -91,8 +92,8 @@ text-align: center;
 margin: 20px;
 }
 
-.post-golf-gathering-title {
-font-size: 50px;
+.post-golf-gathering-title , .tee-times{
+font-size: 40px;
 }
 
 .centered-image {
