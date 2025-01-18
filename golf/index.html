@@ -27,7 +27,7 @@
     <div class="fs">
       <img src="images/FS-outing-indiana-green-close.png" alt="Father-Son_Golf-Outing">
       <div class="info">
-        <h2>June 29th, 2024</h2>
+        <h2>July 12th, 2025</h2>
         <div class="location"><a style="color: white;"
             href="https://maps.apple.com/?address=1728%20Jackson%20St,%20Jasper,%20IN%20%2047546,%20United%20States&auid=9242377755860568296&ll=38.406861,-86.930946&lsp=9902&q=Buffalo%20Trace%20Golf%20Course"
             target="_blank">Buffalo Trace Golf Course</a>
@@ -58,43 +58,37 @@
       } 
       .tableizer-table td {
         padding: .5px 0px;
+        padding-right: 2px;
         /* margin: 2px 5px; */
         border: none;
       }
     </style>
     <h3 class="tee-times">Tee Times:</h3>
-    <table class="tableizer-table">
-    <thead><tr class="tableizer-firstrow">
-      <tbody>
-      <tr><td>8:00 AM</td><td></td><td>Terry Kissel</td><td>9:10 AM</td><td></td><td>Botch·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Landon Kissel</td><td>&nbsp;</td><td>&nbsp;</td><td>David Ubehlor·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>WKU</td><td>&nbsp;</td><td>&nbsp;</td><td>Uncle·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td></td><td>&nbsp;</td><td>&nbsp;</td><td>Daniel Ubehlor·</td></tr>
-     <tr><td>8:10 AM</td><td></td><td>Carter Gentry·</td><td>9:20 AM</td><td></td><td>Mike Blessinger·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Landon Betz·</td><td>&nbsp;</td><td>&nbsp;</td><td>tbd·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Jade Jochum</td><td>&nbsp;</td><td>&nbsp;</td><td>tbd·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Cody Scherle</td><td>&nbsp;</td><td>&nbsp;</td><td>tbd·</td></tr>
-     <tr><td>8:20 AM</td><td></td><td>Mike Kilian·</td><td>9:30 AM</td><td></td><td>Ed Hollinden·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Cam Kilian·</td><td>&nbsp;</td><td>&nbsp;</td><td>Avery Hollinden·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Kyle Heichelbech·</td><td>&nbsp;</td><td>&nbsp;</td><td>Gavin Hopf·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Pete Heichelbech·</td><td>&nbsp;</td><td>&nbsp;</td><td>Jerry Hopf·</td></tr>
-     <tr><td>8:30 AM</td><td></td><td>Jason Stamm·</td><td>9:40 AM</td><td></td><td>Kevin Mehringer·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Carter Stamm·</td><td>&nbsp;</td><td>&nbsp;</td><td>Cameron Mehringer·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Greg Sermersheim·</td><td>&nbsp;</td><td>&nbsp;</td><td>Tysen Mehringer·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Brandon Sermersheim·</td><td>&nbsp;</td><td>&nbsp;</td><td>Kurt Mehringer·</td></tr>
-     <tr><td>8:40 AM</td><td></td><td>Gary Love·</td><td>9:50 AM</td><td></td><td>Gus Heichelbech</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Kade Love·</td><td>&nbsp;</td><td>&nbsp;</td><td>Mitch Kaiser</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Gene Mattingly·</td><td>&nbsp;</td><td>&nbsp;</td><td>Elliott Hopf</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Payton Mattingly·</td><td>&nbsp;</td><td>&nbsp;</td><td></td></tr>
-     <tr><td>8:50 AM</td><td></td><td>Chad Knies</td><td>10:00 AM</td><td></td><td>Ben Kizior·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Perry Knies</td><td>&nbsp;</td><td>&nbsp;</td><td>John Kizior·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Kyle Knies</td><td>&nbsp;</td><td>&nbsp;</td><td>Luke Ackerman·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Craig Knies</td><td>&nbsp;</td><td>&nbsp;</td><td>Dan Ackerman·</td></tr>
-     <tr><td>9:00 AM</td><td></td><td>Art Rillo·</td><td>10:10 AM</td><td></td><td>Lance Leinenbach·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Nathan Rillo·</td><td>&nbsp;</td><td>&nbsp;</td><td>Landen Leinenbach·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Chad Hurm·</td><td>&nbsp;</td><td>&nbsp;</td><td>Emerich Leinenbach·</td></tr>
-     <tr><td>&nbsp;</td><td>&nbsp;</td><td>Kadon Hurm·</td><td>&nbsp;</td><td>&nbsp;</td><td>Uncle·</td></tr>
-    </tbody></table>
+      <table id="csvTable" class="tableizer-table"></table>
+      <script>
+          const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTJ7DR-zxrVSbJgtQ2WEKZK-JI8-Ex8GGJrQXO9aNppaucUtmsJCtxvsmY-ZDeO_7itZqtbIVAL-8g_/pub?gid=0&single=true&output=csv"; // Replace with your CSV URL
+    
+          fetch(csvUrl)
+            .then(response => response.text())
+            .then(csvText => {
+              const rows = csvText.trim().split("\n");
+              const table = document.getElementById("csvTable");
+    
+              // Populate data
+              rows.forEach(row => {
+                const tr = document.createElement("tr");
+                const cells = row.split(",");
+                cells.forEach(cell => {
+                  const td = document.createElement("td");
+                  td.textContent = cell.trim();
+                  tr.appendChild(td);
+                });
+                table.appendChild(tr);
+              });
+            })
+            .catch(error => console.error("Error loading CSV:", error));
+        ;
+      </script>
     <div class="post-golf-gathering">
       <h1 class="post-golf-gathering-title">Post-Golf Gathering:</h1>
       <h2 style="font-size: 30px">Starts at 4 p.m.</h2>
@@ -145,7 +139,7 @@
           </ul>
         </div>
         <div class="company-info">
-          <p>&copy; 2024 Benjamin Kizior. All rights reserved.</p>
+          <p>&copy; 2025 Benjamin Kizior. All rights reserved.</p>
           <!-- <p>6</p> -->
         </div>
       </div>
