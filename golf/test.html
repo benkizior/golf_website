@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Schedule</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Golf Tee Times</h2>
+<table id="csvTable">
+    <thead>
+        <tr>
+            <th>Tee Time</th>
+            <th>Team Name</th>
+            <th>Next Round</th>
+            <th>Players</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>9:00 AM</td>
+            <td></td>
+            <td>10:10 AM</td>
+            <td>Lance Leinenbach, Landen Leinenbach, Emerich Leinenbach, Eli Mann</td>
+        </tr>
+        <tr>
+            <td>9:10 AM</td>
+            <td></td>
+            <td>10:20 AM</td>
+            <td>Kyle Heichelbech, Jack Heichelbech, Pete Heichelbech, Gus Heichelbech</td>
+        </tr>
+        <tr>
+            <td>9:20 AM</td>
+            <td class="highlight">Clubby</td>
+            <td>10:30 AM</td>
+            <td>Ed Hollinden, Cam Kilian, Avery Hollinden, Jerry Hopf</td>
+        </tr>
+        <tr>
+            <td>9:30 AM</td>
+            <td>Greg Sermersheim</td>
+            <td>10:40 AM</td>
+            <td>Brandon Sermersheim, Jason Stamm, Carter Stamm</td>
+        </tr>
+        <tr>
+            <td>9:40 AM</td>
+            <td>Gary Love</td>
+            <td>10:50 AM</td>
+            <td>Botch, Kade Love, Daniel Uebehlor, David Uebehlor</td>
+        </tr>
+        <tr>
+            <td>9:50 AM</td>
+            <td>Elliott Hopf</td>
+            <td>11:00 AM</td>
+            <td>John Kizior, Ben Kizior, Dan Ackerman, Luke Ackerman</td>
+        </tr>
+        <tr>
+            <td>10:00 AM</td>
+            <td>Art Rillo</td>
+            <td>11:10 AM</td>
+            <td>Nathan Rillo</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
