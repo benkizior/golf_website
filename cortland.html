@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>S3 Uploader</title>
+  <title>Cortland Kizior</title>
   <style>
     html, body {
       margin: 0; height: 100%;
@@ -27,16 +27,35 @@
   </style>
 </head>
 <body>
-  <h2>Click anywhere to upload photos/videos.</h2>
+  <h2>Click anywhere to upload files</h2>
   <div id="status"></div>
 
   <input type="file" id="fileInput" multiple style="display: none;" />
 
   <script>
     const bucketName = 'cortland-grad-2'; // your bucket
-    const region = 'us-east-2'; // your region
+    const region = 'us-east-2';           // your region
     const fileInput = document.getElementById('fileInput');
     const statusDiv = document.getElementById('status');
+
+    function sanitize(str) {
+      return str.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_\-]/g, '');
+    }
+
+    function getTimestampFolderName() {
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const min = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+
+      const platform = sanitize(navigator.platform || 'unknown');
+      const userAgent = sanitize(navigator.userAgent || 'unknown');
+
+      return `uploads/${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}___${platform}___${userAgent}/`;
+    }
 
     document.body.addEventListener('click', () => {
       fileInput.click();
@@ -48,10 +67,13 @@
 
       statusDiv.textContent = 'Uploading...';
 
+      const folder = getTimestampFolderName();
       let allSuccess = true;
 
       for (const file of files) {
-        const encodedKey = encodeURIComponent(file.name);
+        const key = folder + file.name;
+        const encodedKey = encodeURIComponent(key);
+
         const url = `https://${bucketName}.s3.${region}.amazonaws.com/${encodedKey}`;
 
         try {
@@ -63,7 +85,7 @@
 
           if (!res.ok) {
             allSuccess = false;
-            break; // stop on first failure
+            break;
           }
         } catch {
           allSuccess = false;
@@ -75,7 +97,7 @@
         ? '✅ All files uploaded successfully!'
         : '❌ Upload failed.';
 
-      fileInput.value = ''; // reset input for re-upload
+      fileInput.value = ''; // reset input
     });
   </script>
 </body>
