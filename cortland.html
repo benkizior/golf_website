@@ -1,19 +1,82 @@
-<input type="file" id="fileInput" />
-<script>
-document.getElementById('fileInput').addEventListener('change', async (e) => {
-  const file = e.target.files[0];
-  const filename = encodeURIComponent(file.name);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>S3 Uploader</title>
+  <style>
+    html, body {
+      margin: 0; height: 100%;
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    #status {
+      font-size: 1.2em;
+      min-height: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <h2>Click anywhere to upload photos/videos.</h2>
+  <div id="status"></div>
 
-  // Get pre-signed URL from your Lambda function
-  const res = await fetch(`https://ph26vu7s8l.execute-api.us-east-2.amazonaws.com/default?filename=${filename}`);
-  const data = await res.json();
+  <input type="file" id="fileInput" multiple style="display: none;" />
 
-  // Upload file directly to S3
-  await fetch(data.uploadURL, {
-    method: 'PUT',
-    body: file
-  });
+  <script>
+    const bucketName = 'cortland-grad-2'; // your bucket
+    const region = 'us-east-2'; // your region
+    const fileInput = document.getElementById('fileInput');
+    const statusDiv = document.getElementById('status');
 
-  alert('Upload successful!');
-});
-</script>
+    document.body.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', async () => {
+      const files = fileInput.files;
+      if (!files.length) return;
+
+      statusDiv.textContent = 'Uploading...';
+
+      let allSuccess = true;
+
+      for (const file of files) {
+        const encodedKey = encodeURIComponent(file.name);
+        const url = `https://${bucketName}.s3.${region}.amazonaws.com/${encodedKey}`;
+
+        try {
+          const res = await fetch(url, {
+            method: 'PUT',
+            headers: { 'Content-Type': file.type || 'application/octet-stream' },
+            body: file
+          });
+
+          if (!res.ok) {
+            allSuccess = false;
+            break; // stop on first failure
+          }
+        } catch {
+          allSuccess = false;
+          break;
+        }
+      }
+
+      statusDiv.textContent = allSuccess
+        ? '✅ All files uploaded successfully!'
+        : '❌ Upload failed.';
+
+      fileInput.value = ''; // reset input for re-upload
+    });
+  </script>
+</body>
+</html>
