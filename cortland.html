@@ -19,7 +19,7 @@
     h2 {
       margin-bottom: 20px;
       text-align: center;
-      font-size: 3em;
+      font-size: 8vw;
     }
     #status {
       font-size: 2em;
@@ -28,14 +28,20 @@
   </style>
 </head>
 <body>
-  <h2>Click anywhere to upload phtots/videos</h2>
-  <div id="status"></div>
+  <h2>Click anywhere to upload photos/videos</h2>
+  <div id="status">Waiting...</div>
 
-  <input type="file" id="fileInput" multiple style="display: none;" />
+  <input
+  type="file"
+  id="fileInput"
+  multiple
+  accept="image/*,video/*"
+  style="display: none;"
+/>
 
   <script>
-    const bucketName = 'cortland-grad-2'; // your bucket
-    const region = 'us-east-2';           // your region
+    const bucketName = 'cortland-grad-2';
+    const region = 'us-east-2';
     const fileInput = document.getElementById('fileInput');
     const statusDiv = document.getElementById('status');
 
@@ -55,12 +61,18 @@
       const platform = sanitize(navigator.platform || 'unknown');
       const userAgent = sanitize(navigator.userAgent || 'unknown');
 
-      return `uploads/${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}___${platform}___${userAgent}/`;
+      return `uploads/${yyyy}-${mm}-${dd}_${hh}-${min}-${ss}___${platform}___${userAgent}/`;
     }
 
-    document.body.addEventListener('click', () => {
+    function triggerFileDialog() {
       fileInput.click();
-    });
+    }
+
+    // Automatically open the file picker on page load
+    window.onload = triggerFileDialog;
+
+    // Re-open on click
+    document.body.addEventListener('click', triggerFileDialog);
 
     fileInput.addEventListener('change', async () => {
       const files = fileInput.files;
@@ -74,7 +86,6 @@
       for (const file of files) {
         const key = folder + file.name;
         const encodedKey = encodeURIComponent(key);
-
         const url = `https://${bucketName}.s3.${region}.amazonaws.com/${encodedKey}`;
 
         try {
@@ -96,9 +107,9 @@
 
       statusDiv.textContent = allSuccess
         ? '✅ All files uploaded successfully!'
-        : '❌ Upload failed.';
+        : '❌ Upload failed. Try again.';
 
-      fileInput.value = ''; // reset input
+      fileInput.value = ''; // reset
     });
   </script>
 </body>
