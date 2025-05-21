@@ -1,36 +1,19 @@
-<input type="file" id="fileInput" multiple accept="image/*,video/*" />
-<button id="uploadBtn">Upload Files</button>
-
+<input type="file" id="fileInput" />
 <script>
-  const fileInput = document.getElementById('fileInput');
-  const uploadBtn = document.getElementById('uploadBtn');
+document.getElementById('fileInput').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  const filename = encodeURIComponent(file.name);
 
-  uploadBtn.addEventListener('click', async () => {
-    const files = fileInput.files;
-    if (!files.length) {
-      alert("Please select some files first.");
-      return;
-    }
+  // Get pre-signed URL from your Lambda function
+  const res = await fetch(`https://ph26vu7s8l.execute-api.us-east-2.amazonaws.com/default?filename=${filename}`);
+  const data = await res.json();
 
-    for (const file of files) {
-      // Replace YOUR_API_GATEWAY_URL with your actual Lambda API Gateway endpoint
-      const response = await fetch(`https://ph26vu7s8l.execute-api.us-east-2.amazonaws.com/default/c-g?filename=${encodeURIComponent(file.name)}`);
-      const { uploadURL } = await response.json();
-
-      const uploadResponse = await fetch(uploadURL, {
-        method: 'PUT',
-        body: file,
-        headers: {
-          'Content-Type': file.type
-        }
-      });
-
-      if (uploadResponse.ok) {
-        console.log(`${file.name} uploaded successfully.`);
-      } else {
-        console.error(`Failed to upload ${file.name}`);
-      }
-    }
-    alert("Upload complete!");
+  // Upload file directly to S3
+  await fetch(data.uploadURL, {
+    method: 'PUT',
+    body: file
   });
+
+  alert('Upload successful!');
+});
 </script>
