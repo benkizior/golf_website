@@ -61,7 +61,7 @@
       const platform = sanitize(navigator.platform || 'unknown');
       const userAgent = sanitize(navigator.userAgent || 'unknown');
 
-      return `uploads/${yyyy}-${mm}-${dd}_${hh}-${min}-${ss}___${platform}___${userAgent}/`;
+      return `uploads/${yyyy}-${mm}-${dd}_${hh}:${min}:${ss}___${platform}___${userAgent}/`;
     }
 
     function triggerFileDialog() {
