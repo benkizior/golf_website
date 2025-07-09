@@ -61,6 +61,12 @@
         border: none;
         text-align: left;
       }
+      .tableizer-table th {
+        padding: 8px 12px;
+        text-align: left;
+        font-weight: bold;
+        border-bottom: 2px solid #444;
+      }
     </style>
     <h3 class="tee-times">Tee Times:</h3>
     <div class="table-container">
@@ -74,6 +80,15 @@
             .then(csvText => {
               const rows = csvText.trim().split("\n");
               const table = document.getElementById("csvTable");
+
+              // Add header row
+              const header = document.createElement("tr");
+              ["Tee Time", "Player 1", "Player 2", "Player 3", "Player 4", "Starting Score "].forEach(text => {
+                const th = document.createElement("th");
+                th.textContent = text;
+                header.appendChild(th);
+              });
+              table.appendChild(header);
 
               rows.forEach(row => {
                 const tr = document.createElement("tr");

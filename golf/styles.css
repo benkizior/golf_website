@@ -1,5 +1,3 @@
-
-
 body {
   color: white;
     margin: 0;
@@ -243,6 +241,10 @@ img {
   text-align: left;
 }
 
+.tableizer-table td:last-child {
+  text-align: center;
+}
+
 /* Zebra striping */
 .tableizer-table tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.1);
@@ -252,6 +254,18 @@ img {
 .tableizer-table tr:hover {
   background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
+}
+
+/* Header styles */
+.tableizer-table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #444;
+}
+
+.tableizer-table th:last-child {
+  text-align: center;
 }
 
 /* Responsive adjustment */
