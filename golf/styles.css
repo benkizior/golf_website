@@ -14,7 +14,7 @@ body {
   .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 10px 50px;
+    padding: 10px 20px;
     /* background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); */
     border-radius: 10px;
@@ -25,7 +25,7 @@ body {
     text-align: center;
     color: white;
     font-size: 58px;
-    margin: 0 0 20px;
+    margin: 0 0 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   }
 
@@ -33,13 +33,13 @@ body {
     text-align: center;
     color: white;
     font-size: 39px;
-    margin: 0;
+    margin: 0 0 10px;
   }
 
   h3 {
     color: white;
     font-size: 28px;
-    margin: 10px 0 10px;
+    margin: 5px 0 5px;
     text-align: center;
   }
 
@@ -59,7 +59,7 @@ body {
   }
 
   .rules-list li {
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     font-size: 20px;
   }
 
@@ -74,12 +74,13 @@ body {
   }
 
   .post-golf-gathering h3 {
-    margin-top: 0;
-    font-size: 14px;
+    margin: 5px 0;
+    font-size: 16px;
   }
 
   .post-golf-gathering p {
-    font-size: 18px;
+    margin: 5px 0;
+    font-size: 16px;
   }
 
   .footer {
@@ -211,5 +212,55 @@ img {
 @media (max-width: 650px) {
   .fs {
     flex-direction: column;
+  }
+}
+
+
+
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Tableizer table styles */
+.tableizer-table {
+  font-size: 18px;
+  width: auto;
+  border-collapse: collapse;
+  margin: 0 auto;
+  table-layout: auto;
+  min-width: 600px; /* ensure table can be scrolled horizontally if needed */
+}
+
+.tableizer-table tr {
+  border-bottom: 1px solid #444;
+  /* Removed left border */
+}
+
+.tableizer-table td {
+  padding: 6px 8px;
+  border: none;
+  text-align: left;
+}
+
+/* Zebra striping */
+.tableizer-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Row hover highlight */
+.tableizer-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+/* Responsive adjustment */
+@media (max-width: 650px) {
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .tableizer-table {
+    min-width: 600px;
   }
 }

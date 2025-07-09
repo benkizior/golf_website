@@ -50,20 +50,22 @@
     <style type="text/css">
       table.tableizer-table {
         font-size: 20px;
-        /* border: 1px solid #CCC;  */
-        margin-left: auto; 
-        margin-right: auto;
-      } 
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto;
+        margin: 0 auto;
+        display: table;
+      }
       .tableizer-table td {
-        padding: .5px 0px;
-        padding-right: 2px;
-        /* margin: 2px 5px; */
+        padding: 8px 12px;
         border: none;
-        /* text-align: center; */
+        text-align: left;
       }
     </style>
     <h3 class="tee-times">Tee Times:</h3>
+    <div class="table-container">
       <table id="csvTable" class="tableizer-table"></table>
+    </div>
       <script>
           const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQOUeN34d6GXeHs5-xY52OQLDma_QtwtqjBwSnvumZI0ikRc1y46p9erQ6Rwlyj8WwLTfBN5j9ON-C/pub?gid=934527058&single=true&output=csv"; // Replace with your CSV URL
     
@@ -72,21 +74,30 @@
             .then(csvText => {
               const rows = csvText.trim().split("\n");
               const table = document.getElementById("csvTable");
-    
-              // Populate data
+
               rows.forEach(row => {
                 const tr = document.createElement("tr");
                 const cells = row.split(",");
-                cells.forEach(cell => {
-                  const td = document.createElement("td");
-                  td.textContent = cell.trim();
-                  tr.appendChild(td);
-                });
+
+                // Expect CSV: [teeTime, player1, player2, player3, player4, score]
+                const tdTime = document.createElement("td");
+                tdTime.textContent = cells[0].trim();
+                tr.appendChild(tdTime);
+
+                for (let i = 1; i <= 4; i++) {
+                  const tdPlayer = document.createElement("td");
+                  tdPlayer.textContent = (cells[i] || "").trim();
+                  tr.appendChild(tdPlayer);
+                }
+
+                const tdScore = document.createElement("td");
+                tdScore.textContent = (cells[5] || "").trim();
+                tr.appendChild(tdScore);
+
                 table.appendChild(tr);
               });
             })
             .catch(error => console.error("Error loading CSV:", error));
-        ;
       </script>
     <div class="post-golf-gathering">
       <h1 class="post-golf-gathering-title">Post-Golf Gathering:</h1>
