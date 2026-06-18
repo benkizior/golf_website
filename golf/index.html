@@ -86,7 +86,7 @@
 
               // Add header row
               const header = document.createElement("tr");
-              ["Tee Time", "Team 1", "Team 2"].forEach(text => {
+              ["Tee Time", "Team 1", "", "Team 2"].forEach(text => {
                 const th = document.createElement("th");
                 th.textContent = text;
                 header.appendChild(th);
@@ -102,7 +102,7 @@
                 tdTime.textContent = cells[0].trim();
                 tr.appendChild(tdTime);
 
-                for (let i = 1; i <= 1; i++) {
+                for (let i = 1; i <= 2; i++) {
                   const tdPlayer = document.createElement("td");
                   tdPlayer.textContent = (cells[i] || "").trim();
                   tr.appendChild(tdPlayer);
